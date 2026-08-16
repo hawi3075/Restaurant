@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Utensils, Globe, LogOut, User as UserIcon } from 'lucide-react';
+import { 
+  Utensils, Globe, LogOut, User as UserIcon, Menu, X, 
+  ShoppingBag, MapPin, HelpCircle, MessageSquare, LogIn,
+  Store, Info, LayoutGrid 
+} from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 export default function Navbar() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleLogout = () => {
     logout();
+    setMenuOpen(false);
     navigate('/login');
   };
 
@@ -27,80 +33,242 @@ export default function Navbar() {
           </span>
         </Link>
 
-        {/* Navigation Links */}
+        {/* Desktop Navigation Links */}
         <nav className="hidden lg:flex items-center space-x-8 font-medium text-gray-600">
-          
-          {/* Home Link (Exact Match) */}
           <Link 
             to="/" 
             className={`flex items-center space-x-1 transition ${
-              location.pathname === '/' 
-                ? 'text-orange-600 font-bold' 
-                : 'hover:text-orange-600 font-medium text-gray-600'
+              location.pathname === '/' ? 'text-orange-600 font-bold' : 'hover:text-orange-600 text-gray-600'
             }`}
           >
             <Utensils className={`w-4 h-4 ${location.pathname === '/' ? 'text-orange-600' : ''}`} />
             <span>Home</span>
           </Link>
           
-          {/* Category Link */}
           <Link 
             to="/categories" 
             className={`transition ${
-              location.pathname === '/categories' 
-                ? 'text-orange-600 font-bold' 
-                : 'hover:text-orange-600 font-medium text-gray-600'
+              location.pathname === '/categories' ? 'text-orange-600 font-bold' : 'hover:text-orange-600 text-gray-600'
             }`}
           >
             Category
           </Link>
 
-          {/* About Us Link */}
+          <Link 
+            to="/restaurants" 
+            className={`transition ${
+              location.pathname === '/restaurants' ? 'text-orange-600 font-bold' : 'hover:text-orange-600 text-gray-600'
+            }`}
+          >
+            Restaurants
+          </Link>
+
           <Link 
             to="/about" 
             className={`transition ${
-              location.pathname === '/about' 
-                ? 'text-orange-600 font-bold' 
-                : 'hover:text-orange-600 font-medium text-gray-600'
+              location.pathname === '/about' ? 'text-orange-600 font-bold' : 'hover:text-orange-600 text-gray-600'
             }`}
           >
             About Us
           </Link>
 
-          <Link to="/#privacy" className="hover:text-orange-600 transition">Privacy Policy</Link>
-          <Link to="/#contact" className="hover:text-orange-600 transition">Contact</Link>
+          <Link 
+            to="/contact" 
+            className={`transition ${
+              location.pathname === '/contact' ? 'text-orange-600 font-bold' : 'hover:text-orange-600 text-gray-600'
+            }`}
+          >
+            Contact
+          </Link>
         </nav>
 
-        {/* Right Action Items: Language, Auth & Join Us */}
+        {/* Right Header Actions */}
         <div className="flex items-center space-x-4">
           <button className="hidden sm:flex items-center space-x-1.5 text-gray-700 hover:text-orange-600 font-medium text-sm px-3 py-1.5 rounded-lg transition">
             <Globe className="w-4 h-4 text-gray-500" />
             <span>En</span>
           </button>
 
-          {user ? (
-            <div className="flex items-center space-x-3">
-              <div className="hidden sm:flex items-center space-x-2 bg-gray-50 px-3 py-1.5 rounded-xl border">
-                <UserIcon className="w-4 h-4 text-orange-600" />
-                <span className="text-sm font-semibold text-gray-700">{user.name || user.email}</span>
-                <span className="text-xs bg-orange-100 text-orange-700 font-bold px-2 py-0.5 rounded-full uppercase">
-                  {user.role}
-                </span>
+          {!user && (
+            <Link 
+              to="/login" 
+              className="hidden sm:block bg-orange-600 hover:bg-orange-700 text-white font-bold px-5 py-2.5 rounded-xl shadow-lg shadow-orange-600/20 transition text-sm"
+            >
+              Join Us
+            </Link>
+          )}
+
+          {/* Hamburger Menu Toggle Button */}
+          <button 
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="p-2.5 rounded-xl bg-gray-100 hover:bg-orange-50 text-gray-700 hover:text-orange-600 transition shadow-sm"
+            aria-label="Menu"
+          >
+            {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
+
+      </div>
+
+      {/* Backdrop overlay for smooth slide panel */}
+      {menuOpen && (
+        <div 
+          className="fixed inset-0 bg-black/40 backdrop-blur-xs z-40 transition-opacity" 
+          onClick={() => setMenuOpen(false)}
+        />
+      )}
+
+      {/* Slide-out Menu Panel from Right to Left */}
+      <div className={`fixed top-0 right-0 h-full w-80 sm:w-96 bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out flex flex-col ${
+        menuOpen ? 'translate-x-0' : 'translate-x-full'
+      }`}>
+        
+        {/* Drawer Header */}
+        <div className="flex items-center justify-between p-6 border-b border-gray-100">
+          <h3 className="font-black text-xl text-gray-900 tracking-tight">Menu</h3>
+          <button 
+            onClick={() => setMenuOpen(false)}
+            className="p-2 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-700 transition"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+
+        {/* Scrollable Menu Items */}
+        <div className="flex-1 overflow-y-auto p-6 space-y-3">
+          
+          {user && (
+            <div className="flex items-center space-x-3 p-3.5 bg-orange-50 rounded-2xl mb-4 border border-orange-100">
+              <div className="bg-orange-600 text-white p-2.5 rounded-xl shadow-md">
+                <UserIcon className="w-5 h-5" />
               </div>
-              <button 
-                onClick={handleLogout}
-                className="flex items-center space-x-1 text-gray-600 hover:text-red-600 bg-gray-100 hover:bg-red-50 px-3 py-2 rounded-xl transition font-medium text-sm"
-              >
-                <LogOut className="w-4 h-4" />
-                <span>Logout</span>
-              </button>
+              <div className="overflow-hidden">
+                <p className="font-bold text-gray-900 truncate">{user.name || 'User'}</p>
+                <p className="text-xs text-gray-500 truncate">{user.email}</p>
+              </div>
             </div>
+          )}
+
+          {/* 1. Profile */}
+          <Link 
+            to="/profile" 
+            onClick={() => setMenuOpen(false)}
+            className="flex items-center space-x-4 p-3 rounded-2xl hover:bg-orange-50 hover:text-orange-600 group transition"
+          >
+            <div className="bg-orange-600 text-white p-2.5 rounded-xl shadow-md group-hover:scale-105 transition">
+              <UserIcon className="w-5 h-5" />
+            </div>
+            <span className="font-bold text-gray-800 group-hover:text-orange-600 text-sm">Profile</span>
+          </Link>
+
+          {/* 2. My Address */}
+          <Link 
+            to="/address" 
+            onClick={() => setMenuOpen(false)}
+            className="flex items-center space-x-4 p-3 rounded-2xl hover:bg-orange-50 hover:text-orange-600 group transition"
+          >
+            <div className="bg-orange-600 text-white p-2.5 rounded-xl shadow-md group-hover:scale-105 transition">
+              <MapPin className="w-5 h-5" />
+            </div>
+            <span className="font-bold text-gray-800 group-hover:text-orange-600 text-sm">My Address</span>
+          </Link>
+
+          {/* 3. My Orders */}
+          <Link 
+            to="/orders" 
+            onClick={() => setMenuOpen(false)}
+            className="flex items-center space-x-4 p-3 rounded-2xl hover:bg-orange-50 hover:text-orange-600 group transition"
+          >
+            <div className="bg-orange-600 text-white p-2.5 rounded-xl shadow-md group-hover:scale-105 transition">
+              <ShoppingBag className="w-5 h-5" />
+            </div>
+            <span className="font-bold text-gray-800 group-hover:text-orange-600 text-sm">My Orders</span>
+          </Link>
+
+          {/* 4. Language */}
+          <Link 
+            to="/language" 
+            onClick={() => setMenuOpen(false)}
+            className="flex items-center space-x-4 p-3 rounded-2xl hover:bg-orange-50 hover:text-orange-600 group transition"
+          >
+            <div className="bg-orange-600 text-white p-2.5 rounded-xl shadow-md group-hover:scale-105 transition">
+              <Globe className="w-5 h-5" />
+            </div>
+            <span className="font-bold text-gray-800 group-hover:text-orange-600 text-sm">Language</span>
+          </Link>
+
+          {/* 5. Help & Support */}
+          <Link 
+            to="/contact" 
+            onClick={() => setMenuOpen(false)}
+            className="flex items-center space-x-4 p-3 rounded-2xl hover:bg-orange-50 hover:text-orange-600 group transition"
+          >
+            <div className="bg-orange-600 text-white p-2.5 rounded-xl shadow-md group-hover:scale-105 transition">
+              <HelpCircle className="w-5 h-5" />
+            </div>
+            <span className="font-bold text-gray-800 group-hover:text-orange-600 text-sm">Help & Support</span>
+          </Link>
+
+          {/* 6. Live Chat */}
+          <Link 
+            to="/chat" 
+            onClick={() => setMenuOpen(false)}
+            className="flex items-center space-x-4 p-3 rounded-2xl hover:bg-orange-50 hover:text-orange-600 group transition"
+          >
+            <div className="bg-orange-600 text-white p-2.5 rounded-xl shadow-md group-hover:scale-105 transition">
+              <MessageSquare className="w-5 h-5" />
+            </div>
+            <span className="font-bold text-gray-800 group-hover:text-orange-600 text-sm">Live Chat</span>
+          </Link>
+
+          {/* Main Website Navigation links inside drawer */}
+          <div className="pt-4 border-t border-gray-100 space-y-1">
+            <Link 
+              to="/categories" 
+              onClick={() => setMenuOpen(false)}
+              className="flex items-center space-x-3 p-2.5 text-xs font-bold text-gray-600 hover:text-orange-600 transition"
+            >
+              <LayoutGrid className="w-4 h-4 text-orange-600" />
+              <span>Categories</span>
+            </Link>
+            <Link 
+              to="/restaurants" 
+              onClick={() => setMenuOpen(false)}
+              className="flex items-center space-x-3 p-2.5 text-xs font-bold text-gray-600 hover:text-orange-600 transition"
+            >
+              <Store className="w-4 h-4 text-orange-600" />
+              <span>Restaurants</span>
+            </Link>
+            <Link 
+              to="/about" 
+              onClick={() => setMenuOpen(false)}
+              className="flex items-center space-x-3 p-2.5 text-xs font-bold text-gray-600 hover:text-orange-600 transition"
+            >
+              <Info className="w-4 h-4 text-orange-600" />
+              <span>About Us</span>
+            </Link>
+          </div>
+
+        </div>
+
+        {/* Drawer Footer (Sign Out / Sign In) */}
+        <div className="p-6 border-t border-gray-100 bg-gray-50">
+          {user ? (
+            <button 
+              onClick={handleLogout}
+              className="w-full flex items-center justify-center space-x-2 bg-red-50 text-red-600 hover:bg-red-100 font-bold py-3 rounded-xl transition text-sm shadow-sm"
+            >
+              <LogOut className="w-4 h-4" />
+              <span>Sign Out</span>
+            </button>
           ) : (
             <Link 
               to="/login" 
-              className="bg-orange-600 hover:bg-orange-700 text-white font-bold px-6 py-2.5 rounded-xl shadow-lg shadow-orange-600/20 transition text-sm"
+              onClick={() => setMenuOpen(false)}
+              className="w-full flex items-center justify-center space-x-2 bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 rounded-xl shadow-lg shadow-orange-600/20 transition text-sm"
             >
-              Join Us
+              <LogIn className="w-4 h-4" />
+              <span>Sign In / Join Us</span>
             </Link>
           )}
         </div>

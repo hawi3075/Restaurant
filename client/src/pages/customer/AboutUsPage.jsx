@@ -5,7 +5,7 @@ import Navbar from '../../components/Navbar';
 
 export default function AboutUsPage() {
   return (
-    <div className="min-h-screen bg-white text-gray-800 font-sans selection:bg-orange-500 selection:text-white flex flex-col justify-between">
+    <div className="min-h-screen bg-gradient-to-br from-[#FFF5EE] via-[#FFF8F3] to-[#FFEDDF] text-gray-800 font-sans selection:bg-orange-500 selection:text-white flex flex-col justify-between">
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,600&family=Work+Sans:wght@400;500;600;700;800&display=swap');
         .font-display { font-family: 'Fraunces', serif; }
@@ -87,7 +87,7 @@ export default function AboutUsPage() {
               </p>
 
               {/* Highlight Item 1 */}
-              <div className="flex items-start space-x-4 p-4 rounded-2xl bg-orange-50/50 border border-orange-100">
+              <div className="flex items-start space-x-4 p-4 rounded-2xl bg-white shadow-sm border border-orange-100">
                 <div className="w-12 h-12 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center flex-shrink-0 shadow-sm">
                   <CheckCircle className="w-6 h-6" />
                 </div>
@@ -100,7 +100,7 @@ export default function AboutUsPage() {
               </div>
 
               {/* Highlight Item 2 */}
-              <div className="flex items-start space-x-4 p-4 rounded-2xl bg-orange-50/50 border border-orange-100">
+              <div className="flex items-start space-x-4 p-4 rounded-2xl bg-white shadow-sm border border-orange-100">
                 <div className="w-12 h-12 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center flex-shrink-0 shadow-sm">
                   <CheckCircle className="w-6 h-6" />
                 </div>
@@ -118,7 +118,7 @@ export default function AboutUsPage() {
         </section>
 
         {/* --- 3. VISION, MISSION, GOALS SECTION --- */}
-        <section className="bg-gray-50 py-20 border-y border-gray-100">
+        <section className="bg-white/60 py-20 border-y border-orange-100/60 backdrop-blur-sm">
           <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             
             {/* Left Column: Vision, Mission, Goals Cards */}
@@ -182,52 +182,44 @@ export default function AboutUsPage() {
           </div>
         </section>
 
-        {/* --- 4. STATISTICS COUNTER SECTION --- */}
-        <section className="relative bg-gray-900 py-20 px-6 overflow-hidden text-white">
-          <div className="absolute inset-0 z-0 opacity-20">
-            <img 
-              src="/m2.jpg" 
-              alt="Background texture" 
-              className="w-full h-full object-cover"
-            />
-          </div>
-
+        {/* --- 4. STATISTICS COUNTER SECTION (FIXED: Gradient Theme) --- */}
+        <section className="relative py-20 px-6 overflow-hidden">
           <div className="max-w-7xl mx-auto relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
             
             {/* Stat 1 */}
-            <div className="flex flex-col items-center p-6 rounded-3xl bg-gray-800/50 backdrop-blur-md border border-gray-700/60">
-              <div className="w-16 h-16 rounded-full border-4 border-orange-500 flex items-center justify-center mb-4 relative">
-                <Coffee className="w-6 h-6 text-orange-400" />
+            <div className="flex flex-col items-center p-8 rounded-3xl bg-white shadow-md border border-orange-100 hover:shadow-xl transition-all">
+              <div className="w-16 h-16 rounded-full bg-orange-50 border-4 border-orange-500 flex items-center justify-center mb-4 shadow-sm">
+                <Coffee className="w-6 h-6 text-orange-600" />
               </div>
-              <h3 className="font-display text-3xl font-black mb-1">1200 +</h3>
-              <p className="text-sm font-semibold text-gray-300">Customer Serve</p>
+              <h3 className="font-display text-3xl font-black mb-1 text-gray-900">1200 +</h3>
+              <p className="text-sm font-bold text-gray-500">Customer Serve</p>
             </div>
 
             {/* Stat 2 */}
-            <div className="flex flex-col items-center p-6 rounded-3xl bg-gray-800/50 backdrop-blur-md border border-gray-700/60">
-              <div className="w-16 h-16 rounded-full border-4 border-orange-500 flex items-center justify-center mb-4 relative">
-                <Users className="w-6 h-6 text-orange-400" />
+            <div className="flex flex-col items-center p-8 rounded-3xl bg-white shadow-md border border-orange-100 hover:shadow-xl transition-all">
+              <div className="w-16 h-16 rounded-full bg-orange-50 border-4 border-orange-500 flex items-center justify-center mb-4 shadow-sm">
+                <Users className="w-6 h-6 text-orange-600" />
               </div>
-              <h3 className="font-display text-3xl font-black mb-1">1150 +</h3>
-              <p className="text-sm font-semibold text-gray-300">Experience Chef</p>
+              <h3 className="font-display text-3xl font-black mb-1 text-gray-900">1150 +</h3>
+              <p className="text-sm font-bold text-gray-500">Experience Chef</p>
             </div>
 
             {/* Stat 3 */}
-            <div className="flex flex-col items-center p-6 rounded-3xl bg-gray-800/50 backdrop-blur-md border border-gray-700/60">
-              <div className="w-16 h-16 rounded-full border-4 border-orange-500 flex items-center justify-center mb-4 relative">
-                <Smile className="w-6 h-6 text-orange-400" />
+            <div className="flex flex-col items-center p-8 rounded-3xl bg-white shadow-md border border-orange-100 hover:shadow-xl transition-all">
+              <div className="w-16 h-16 rounded-full bg-orange-50 border-4 border-orange-500 flex items-center justify-center mb-4 shadow-sm">
+                <Smile className="w-6 h-6 text-orange-600" />
               </div>
-              <h3 className="font-display text-3xl font-black mb-1">1250 +</h3>
-              <p className="text-sm font-semibold text-gray-300">Happy Customer</p>
+              <h3 className="font-display text-3xl font-black mb-1 text-gray-900">1250 +</h3>
+              <p className="text-sm font-bold text-gray-500">Happy Customer</p>
             </div>
 
             {/* Stat 4 */}
-            <div className="flex flex-col items-center p-6 rounded-3xl bg-gray-800/50 backdrop-blur-md border border-gray-700/60">
-              <div className="w-16 h-16 rounded-full border-4 border-orange-500 flex items-center justify-center mb-4 relative">
-                <Award className="w-6 h-6 text-orange-400" />
+            <div className="flex flex-col items-center p-8 rounded-3xl bg-white shadow-md border border-orange-100 hover:shadow-xl transition-all">
+              <div className="w-16 h-16 rounded-full bg-orange-50 border-4 border-orange-500 flex items-center justify-center mb-4 shadow-sm">
+                <Award className="w-6 h-6 text-orange-600" />
               </div>
-              <h3 className="font-display text-3xl font-black mb-1">1300 +</h3>
-              <p className="text-sm font-semibold text-gray-300">Winning Awards</p>
+              <h3 className="font-display text-3xl font-black mb-1 text-gray-900">1300 +</h3>
+              <p className="text-sm font-bold text-gray-500">Winning Awards</p>
             </div>
 
           </div>

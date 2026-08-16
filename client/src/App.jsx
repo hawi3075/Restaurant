@@ -7,7 +7,8 @@ import { SocketProvider } from './context/SocketContext';
 import Login from './pages/auth/Login';
 import CustomerHome from './pages/customer/CustomerHome';
 import CategoriesPage from './pages/customer/CategoriesPage';
-import AboutUsPage from './pages/customer/AboutUsPage'; // Added About Us Page
+import AboutUsPage from './pages/customer/AboutUsPage';
+import ContactPage from './pages/customer/ContactPage'; // Added Contact Page
 import AdminDashboard from './pages/admin/AdminDashboard';
 import ChefDashboard from './pages/chef/ChefDashboard';
 import WaiterDashboard from './pages/waiter/WaiterDashboard';
@@ -29,7 +30,8 @@ function App() {
             {/* Customer Portal & Pages */}
             <Route path="/" element={<CustomerHome />} />
             <Route path="/categories" element={<CategoriesPage />} />
-            <Route path="/about" element={<AboutUsPage />} /> {/* Added About Us Route */}
+            <Route path="/about" element={<AboutUsPage />} />
+            <Route path="/contact" element={<ContactPage />} /> {/* Added Contact Route */}
 
             {/* Staff & Admin Portals */}
             <Route path="/admin/*" element={<AdminDashboard />} />
