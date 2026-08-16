@@ -110,7 +110,7 @@ export default function Navbar() {
 
       </div>
 
-      {/* Backdrop overlay for smooth slide panel */}
+      {/* Backdrop overlay */}
       {menuOpen && (
         <div 
           className="fixed inset-0 bg-black/40 backdrop-blur-xs z-40 transition-opacity" 
@@ -118,13 +118,13 @@ export default function Navbar() {
         />
       )}
 
-      {/* Slide-out Menu Panel from Right to Left */}
-      <div className={`fixed top-0 right-0 h-full w-80 sm:w-96 bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out flex flex-col ${
+      {/* Slide-out Menu Panel */}
+      <div className={`fixed inset-y-0 right-0 w-80 sm:w-96 bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out flex flex-col ${
         menuOpen ? 'translate-x-0' : 'translate-x-full'
       }`}>
         
         {/* Drawer Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-100">
+        <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100 shrink-0">
           <h3 className="font-black text-xl text-gray-900 tracking-tight">Menu</h3>
           <button 
             onClick={() => setMenuOpen(false)}
@@ -134,11 +134,11 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Scrollable Menu Items */}
-        <div className="flex-1 overflow-y-auto p-6 space-y-3">
+        {/* Scrollable Menu Items Container */}
+        <div className="flex-1 overflow-y-auto px-6 py-4 space-y-3">
           
           {user && (
-            <div className="flex items-center space-x-3 p-3.5 bg-orange-50 rounded-2xl mb-4 border border-orange-100">
+            <div className="flex items-center space-x-3 p-3.5 bg-orange-50 rounded-2xl mb-2 border border-orange-100">
               <div className="bg-orange-600 text-white p-2.5 rounded-xl shadow-md">
                 <UserIcon className="w-5 h-5" />
               </div>
@@ -149,7 +149,7 @@ export default function Navbar() {
             </div>
           )}
 
-          {/* 1. Profile */}
+          {/* Profile */}
           <Link 
             to="/profile" 
             onClick={() => setMenuOpen(false)}
@@ -161,7 +161,7 @@ export default function Navbar() {
             <span className="font-bold text-gray-800 group-hover:text-orange-600 text-sm">Profile</span>
           </Link>
 
-          {/* 2. My Address */}
+          {/* My Address */}
           <Link 
             to="/address" 
             onClick={() => setMenuOpen(false)}
@@ -173,7 +173,7 @@ export default function Navbar() {
             <span className="font-bold text-gray-800 group-hover:text-orange-600 text-sm">My Address</span>
           </Link>
 
-          {/* 3. My Orders */}
+          {/* My Orders */}
           <Link 
             to="/orders" 
             onClick={() => setMenuOpen(false)}
@@ -185,7 +185,7 @@ export default function Navbar() {
             <span className="font-bold text-gray-800 group-hover:text-orange-600 text-sm">My Orders</span>
           </Link>
 
-          {/* 4. Language */}
+          {/* Language */}
           <Link 
             to="/language" 
             onClick={() => setMenuOpen(false)}
@@ -197,7 +197,7 @@ export default function Navbar() {
             <span className="font-bold text-gray-800 group-hover:text-orange-600 text-sm">Language</span>
           </Link>
 
-          {/* 5. Help & Support */}
+          {/* Help & Support */}
           <Link 
             to="/contact" 
             onClick={() => setMenuOpen(false)}
@@ -209,7 +209,7 @@ export default function Navbar() {
             <span className="font-bold text-gray-800 group-hover:text-orange-600 text-sm">Help & Support</span>
           </Link>
 
-          {/* 6. Live Chat */}
+          {/* Live Chat */}
           <Link 
             to="/chat" 
             onClick={() => setMenuOpen(false)}
@@ -221,8 +221,8 @@ export default function Navbar() {
             <span className="font-bold text-gray-800 group-hover:text-orange-600 text-sm">Live Chat</span>
           </Link>
 
-          {/* Main Website Navigation links inside drawer */}
-          <div className="pt-4 border-t border-gray-100 space-y-1">
+          {/* General Site Links */}
+          <div className="pt-3 border-t border-gray-100 space-y-1">
             <Link 
               to="/categories" 
               onClick={() => setMenuOpen(false)}
@@ -251,8 +251,8 @@ export default function Navbar() {
 
         </div>
 
-        {/* Drawer Footer (Sign Out / Sign In) */}
-        <div className="p-6 border-t border-gray-100 bg-gray-50">
+        {/* Drawer Footer */}
+        <div className="p-6 border-t border-gray-100 bg-gray-50 shrink-0">
           {user ? (
             <button 
               onClick={handleLogout}
