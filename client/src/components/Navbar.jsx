@@ -20,105 +20,107 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        
-        {/* Brand Logo */}
-        <Link to="/" className="flex items-center space-x-2.5">
-          <div className="bg-orange-600 text-white p-2 rounded-xl shadow-md">
-            <Utensils className="w-5 h-5" />
-          </div>
-          <span className="text-2xl font-black tracking-tight text-gray-900">
-            ማእድ <span className="text-orange-600 font-medium text-sm">Ma'ad</span>
-          </span>
-        </Link>
-
-        {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center space-x-8 font-medium text-gray-600">
-          <Link 
-            to="/" 
-            className={`flex items-center space-x-1 transition ${
-              location.pathname === '/' ? 'text-orange-600 font-bold' : 'hover:text-orange-600 text-gray-600'
-            }`}
-          >
-            <Utensils className={`w-4 h-4 ${location.pathname === '/' ? 'text-orange-600' : ''}`} />
-            <span>Home</span>
-          </Link>
+    <>
+      <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
+        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           
-          <Link 
-            to="/categories" 
-            className={`transition ${
-              location.pathname === '/categories' ? 'text-orange-600 font-bold' : 'hover:text-orange-600 text-gray-600'
-            }`}
-          >
-            Category
+          {/* Brand Logo */}
+          <Link to="/" className="flex items-center space-x-2.5">
+            <div className="bg-orange-600 text-white p-2 rounded-xl shadow-md">
+              <Utensils className="w-5 h-5" />
+            </div>
+            <span className="text-2xl font-black tracking-tight text-gray-900">
+              ማእድ <span className="text-orange-600 font-medium text-sm">Ma'ad</span>
+            </span>
           </Link>
 
-          <Link 
-            to="/restaurants" 
-            className={`transition ${
-              location.pathname === '/restaurants' ? 'text-orange-600 font-bold' : 'hover:text-orange-600 text-gray-600'
-            }`}
-          >
-            Restaurants
-          </Link>
-
-          <Link 
-            to="/about" 
-            className={`transition ${
-              location.pathname === '/about' ? 'text-orange-600 font-bold' : 'hover:text-orange-600 text-gray-600'
-            }`}
-          >
-            About Us
-          </Link>
-
-          <Link 
-            to="/contact" 
-            className={`transition ${
-              location.pathname === '/contact' ? 'text-orange-600 font-bold' : 'hover:text-orange-600 text-gray-600'
-            }`}
-          >
-            Contact
-          </Link>
-        </nav>
-
-        {/* Right Header Actions */}
-        <div className="flex items-center space-x-4">
-          <button className="hidden sm:flex items-center space-x-1.5 text-gray-700 hover:text-orange-600 font-medium text-sm px-3 py-1.5 rounded-lg transition">
-            <Globe className="w-4 h-4 text-gray-500" />
-            <span>En</span>
-          </button>
-
-          {!user && (
+          {/* Desktop Navigation Links */}
+          <nav className="hidden lg:flex items-center space-x-8 font-medium text-gray-600">
             <Link 
-              to="/login" 
-              className="hidden sm:block bg-orange-600 hover:bg-orange-700 text-white font-bold px-5 py-2.5 rounded-xl shadow-lg shadow-orange-600/20 transition text-sm"
+              to="/" 
+              className={`flex items-center space-x-1 transition ${
+                location.pathname === '/' ? 'text-orange-600 font-bold' : 'hover:text-orange-600 text-gray-600'
+              }`}
             >
-              Join Us
+              <Utensils className={`w-4 h-4 ${location.pathname === '/' ? 'text-orange-600' : ''}`} />
+              <span>Home</span>
             </Link>
-          )}
+            
+            <Link 
+              to="/categories" 
+              className={`transition ${
+                location.pathname === '/categories' ? 'text-orange-600 font-bold' : 'hover:text-orange-600 text-gray-600'
+              }`}
+            >
+              Category
+            </Link>
 
-          {/* Hamburger Menu Toggle Button */}
-          <button 
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="p-2.5 rounded-xl bg-gray-100 hover:bg-orange-50 text-gray-700 hover:text-orange-600 transition shadow-sm"
-            aria-label="Menu"
-          >
-            {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+            <Link 
+              to="/restaurants" 
+              className={`transition ${
+                location.pathname === '/restaurants' ? 'text-orange-600 font-bold' : 'hover:text-orange-600 text-gray-600'
+              }`}
+            >
+              Restaurants
+            </Link>
+
+            <Link 
+              to="/about" 
+              className={`transition ${
+                location.pathname === '/about' ? 'text-orange-600 font-bold' : 'hover:text-orange-600 text-gray-600'
+              }`}
+            >
+              About Us
+            </Link>
+
+            <Link 
+              to="/contact" 
+              className={`transition ${
+                location.pathname === '/contact' ? 'text-orange-600 font-bold' : 'hover:text-orange-600 text-gray-600'
+              }`}
+            >
+              Contact
+            </Link>
+          </nav>
+
+          {/* Right Header Actions */}
+          <div className="flex items-center space-x-4">
+            <button className="hidden sm:flex items-center space-x-1.5 text-gray-700 hover:text-orange-600 font-medium text-sm px-3 py-1.5 rounded-lg transition">
+              <Globe className="w-4 h-4 text-gray-500" />
+              <span>En</span>
+            </button>
+
+            {!user && (
+              <Link 
+                to="/login" 
+                className="hidden sm:block bg-orange-600 hover:bg-orange-700 text-white font-bold px-5 py-2.5 rounded-xl shadow-lg shadow-orange-600/20 transition text-sm"
+              >
+                Join Us
+              </Link>
+            )}
+
+            {/* Hamburger Menu Toggle Button */}
+            <button 
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="p-2.5 rounded-xl bg-gray-100 hover:bg-orange-50 text-gray-700 hover:text-orange-600 transition shadow-sm relative z-50"
+              aria-label="Menu"
+            >
+              {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+
         </div>
+      </header>
 
-      </div>
-
-      {/* Backdrop overlay */}
+      {/* Backdrop overlay (Rendered outside header to span full screen) */}
       {menuOpen && (
         <div 
-          className="fixed inset-0 bg-black/40 backdrop-blur-xs z-40 transition-opacity" 
+          className="fixed inset-0 bg-black/40 backdrop-blur-xs z-50 transition-opacity" 
           onClick={() => setMenuOpen(false)}
         />
       )}
 
-      {/* Slide-out Menu Panel */}
+      {/* Slide-out Menu Panel (Rendered outside header to guarantee full viewport height) */}
       <div className={`fixed inset-y-0 right-0 w-80 sm:w-96 bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out flex flex-col ${
         menuOpen ? 'translate-x-0' : 'translate-x-full'
       }`}>
@@ -274,6 +276,6 @@ export default function Navbar() {
         </div>
 
       </div>
-    </header>
+    </>
   );
 }
