@@ -153,9 +153,9 @@ export default function Navbar() {
           <Link 
             to="/profile" 
             onClick={() => setMenuOpen(false)}
-            className="flex items-center space-x-4 p-3 rounded-2xl hover:bg-orange-50 hover:text-orange-600 group transition"
+            className="flex items-center space-x-4 p-3 rounded-2xl border border-transparent hover:bg-orange-50 hover:border-orange-100 hover:text-orange-600 hover:translate-x-1 hover:shadow-sm group transition-all duration-300"
           >
-            <div className="bg-orange-600 text-white p-2.5 rounded-xl shadow-md group-hover:scale-105 transition">
+            <div className="bg-orange-600 text-white p-2.5 rounded-xl shadow-md group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300">
               <UserIcon className="w-5 h-5" />
             </div>
             <span className="font-bold text-gray-800 group-hover:text-orange-600 text-sm">Profile</span>
@@ -165,9 +165,9 @@ export default function Navbar() {
           <Link 
             to="/address" 
             onClick={() => setMenuOpen(false)}
-            className="flex items-center space-x-4 p-3 rounded-2xl hover:bg-orange-50 hover:text-orange-600 group transition"
+            className="flex items-center space-x-4 p-3 rounded-2xl border border-transparent hover:bg-orange-50 hover:border-orange-100 hover:text-orange-600 hover:translate-x-1 hover:shadow-sm group transition-all duration-300"
           >
-            <div className="bg-orange-600 text-white p-2.5 rounded-xl shadow-md group-hover:scale-105 transition">
+            <div className="bg-orange-600 text-white p-2.5 rounded-xl shadow-md group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300">
               <MapPin className="w-5 h-5" />
             </div>
             <span className="font-bold text-gray-800 group-hover:text-orange-600 text-sm">My Address</span>
@@ -177,9 +177,9 @@ export default function Navbar() {
           <Link 
             to="/orders" 
             onClick={() => setMenuOpen(false)}
-            className="flex items-center space-x-4 p-3 rounded-2xl hover:bg-orange-50 hover:text-orange-600 group transition"
+            className="flex items-center space-x-4 p-3 rounded-2xl border border-transparent hover:bg-orange-50 hover:border-orange-100 hover:text-orange-600 hover:translate-x-1 hover:shadow-sm group transition-all duration-300"
           >
-            <div className="bg-orange-600 text-white p-2.5 rounded-xl shadow-md group-hover:scale-105 transition">
+            <div className="bg-orange-600 text-white p-2.5 rounded-xl shadow-md group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300">
               <ShoppingBag className="w-5 h-5" />
             </div>
             <span className="font-bold text-gray-800 group-hover:text-orange-600 text-sm">My Orders</span>
@@ -189,9 +189,9 @@ export default function Navbar() {
           <Link 
             to="/language" 
             onClick={() => setMenuOpen(false)}
-            className="flex items-center space-x-4 p-3 rounded-2xl hover:bg-orange-50 hover:text-orange-600 group transition"
+            className="flex items-center space-x-4 p-3 rounded-2xl border border-transparent hover:bg-orange-50 hover:border-orange-100 hover:text-orange-600 hover:translate-x-1 hover:shadow-sm group transition-all duration-300"
           >
-            <div className="bg-orange-600 text-white p-2.5 rounded-xl shadow-md group-hover:scale-105 transition">
+            <div className="bg-orange-600 text-white p-2.5 rounded-xl shadow-md group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300">
               <Globe className="w-5 h-5" />
             </div>
             <span className="font-bold text-gray-800 group-hover:text-orange-600 text-sm">Language</span>
@@ -201,9 +201,9 @@ export default function Navbar() {
           <Link 
             to="/contact" 
             onClick={() => setMenuOpen(false)}
-            className="flex items-center space-x-4 p-3 rounded-2xl hover:bg-orange-50 hover:text-orange-600 group transition"
+            className="flex items-center space-x-4 p-3 rounded-2xl border border-transparent hover:bg-orange-50 hover:border-orange-100 hover:text-orange-600 hover:translate-x-1 hover:shadow-sm group transition-all duration-300"
           >
-            <div className="bg-orange-600 text-white p-2.5 rounded-xl shadow-md group-hover:scale-105 transition">
+            <div className="bg-orange-600 text-white p-2.5 rounded-xl shadow-md group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300">
               <HelpCircle className="w-5 h-5" />
             </div>
             <span className="font-bold text-gray-800 group-hover:text-orange-600 text-sm">Help & Support</span>
@@ -213,9 +213,9 @@ export default function Navbar() {
           <Link 
             to="/chat" 
             onClick={() => setMenuOpen(false)}
-            className="flex items-center space-x-4 p-3 rounded-2xl hover:bg-orange-50 hover:text-orange-600 group transition"
+            className="flex items-center space-x-4 p-3 rounded-2xl border border-transparent hover:bg-orange-50 hover:border-orange-100 hover:text-orange-600 hover:translate-x-1 hover:shadow-sm group transition-all duration-300"
           >
-            <div className="bg-orange-600 text-white p-2.5 rounded-xl shadow-md group-hover:scale-105 transition">
+            <div className="bg-orange-600 text-white p-2.5 rounded-xl shadow-md group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300">
               <MessageSquare className="w-5 h-5" />
             </div>
             <span className="font-bold text-gray-800 group-hover:text-orange-600 text-sm">Live Chat</span>
@@ -226,7 +226,7 @@ export default function Navbar() {
             <Link 
               to="/categories" 
               onClick={() => setMenuOpen(false)}
-              className="flex items-center space-x-3 p-2.5 text-xs font-bold text-gray-600 hover:text-orange-600 transition"
+              className="flex items-center space-x-3 p-2.5 rounded-xl text-xs font-bold text-gray-600 hover:text-orange-600 hover:bg-orange-50 hover:translate-x-1 transition-all duration-300"
             >
               <LayoutGrid className="w-4 h-4 text-orange-600" />
               <span>Categories</span>
@@ -234,7 +234,7 @@ export default function Navbar() {
             <Link 
               to="/restaurants" 
               onClick={() => setMenuOpen(false)}
-              className="flex items-center space-x-3 p-2.5 text-xs font-bold text-gray-600 hover:text-orange-600 transition"
+              className="flex items-center space-x-3 p-2.5 rounded-xl text-xs font-bold text-gray-600 hover:text-orange-600 hover:bg-orange-50 hover:translate-x-1 transition-all duration-300"
             >
               <Store className="w-4 h-4 text-orange-600" />
               <span>Restaurants</span>
@@ -242,7 +242,7 @@ export default function Navbar() {
             <Link 
               to="/about" 
               onClick={() => setMenuOpen(false)}
-              className="flex items-center space-x-3 p-2.5 text-xs font-bold text-gray-600 hover:text-orange-600 transition"
+              className="flex items-center space-x-3 p-2.5 rounded-xl text-xs font-bold text-gray-600 hover:text-orange-600 hover:bg-orange-50 hover:translate-x-1 transition-all duration-300"
             >
               <Info className="w-4 h-4 text-orange-600" />
               <span>About Us</span>
