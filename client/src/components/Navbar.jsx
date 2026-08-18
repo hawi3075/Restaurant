@@ -6,6 +6,8 @@ import {
   Store, Info, LayoutGrid, ShieldCheck, Mail, Lock, User, Phone, ArrowRight, ArrowLeft
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import NotificationBell from './NotificationBell';
+import GlobalSearch from './GlobalSearch';
 
 // --- Integrated Auth Modal Component with Back Icon ---
 function AuthModal({ isOpen, onClose, initialMode = 'login' }) {
@@ -337,10 +339,16 @@ export default function Navbar() {
 
           {/* Right Header Actions */}
           <div className="flex items-center space-x-4">
+            {/* Global Search */}
+            <GlobalSearch />
+
             <button className="hidden sm:flex items-center space-x-1.5 text-gray-700 hover:text-orange-600 font-medium text-sm px-3 py-1.5 rounded-lg transition">
               <Globe className="w-4 h-4 text-gray-500" />
               <span>En</span>
             </button>
+
+            {/* Notification Bell */}
+            {user && <NotificationBell />}
 
             {!user && (
               <button 

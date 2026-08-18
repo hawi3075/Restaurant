@@ -18,15 +18,31 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
+      console.log('AuthContext: Attempting login for', email);
       const response = await API.post('/auth/login', { email, password });
+      console.log('AuthContext: Login response:', response.data);
+      
       const { token: newToken, user: userData } = response.data;
       
+      if (!newToken || !userData) {
+        console.error('AuthContext: Invalid response format', response.data);
+        return { 
+          success: false, 
+          error: 'Invalid response from server' 
+        };
+      }
+      
+      console.log('AuthContext: Storing token and user:', userData);
       localStorage.setItem('token', newToken);
       localStorage.setItem('user', JSON.stringify(userData));
       setToken(newToken);
       setUser(userData);
+      
+      console.log('AuthContext: Login successful, role:', userData.role);
       return { success: true, role: userData.role };
     } catch (error) {
+      console.error('AuthContext: Login error:', error);
+      console.error('AuthContext: Error response:', error.response?.data);
       return { 
         success: false, 
         error: error.response?.data?.error || 'Login failed. Please check your credentials.' 

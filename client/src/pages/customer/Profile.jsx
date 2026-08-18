@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { Link } from 'react-router-dom';
+import API from '../../services/api';
+import Navbar from '../../components/Navbar';
 import { 
   User, Mail, Phone, MapPin, Camera, Edit3, Save, X, 
   ShieldCheck, ShoppingBag, ArrowRight, LogIn, UserPlus 
@@ -11,13 +13,39 @@ export default function Profile() {
   
   // Edit state for user profile details
   const [isEditing, setIsEditing] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
   const [profileData, setProfileData] = useState({
-    name: user?.name || 'Hawi Girma',
-    email: user?.email || 'hawig3521@gmail.com',
-    phone: user?.phone || '+251 91 234 5678',
-    address: user?.address || 'Adama, Ethiopia',
-    avatar: user?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80'
+    name: '',
+    email: '',
+    phone: '',
+    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80'
   });
+
+  useEffect(() => {
+    if (user) {
+      fetchProfile();
+    } else {
+      setLoading(false);
+    }
+  }, [user]);
+
+  const fetchProfile = async () => {
+    try {
+      setLoading(true);
+      const response = await API.get('/users/profile');
+      setProfileData({
+        name: response.data.name || '',
+        email: response.data.email || '',
+        phone: response.data.phone || '',
+        avatar: response.data.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80'
+      });
+    } catch (error) {
+      console.error('Error fetching profile:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // Handle Input Changes
   const handleChange = (e) => {
@@ -36,9 +64,22 @@ export default function Profile() {
     }
   };
 
-  const handleSave = (e) => {
+  const handleSave = async (e) => {
     e.preventDefault();
-    setIsEditing(false);
+    try {
+      setSaving(true);
+      await API.put('/users/profile', {
+        name: profileData.name,
+        phone: profileData.phone
+      });
+      setIsEditing(false);
+      alert('Profile updated successfully!');
+    } catch (error) {
+      console.error('Error updating profile:', error);
+      alert('Failed to update profile. Please try again.');
+    } finally {
+      setSaving(false);
+    }
   };
 
   // ==========================================
@@ -46,7 +87,9 @@ export default function Profile() {
   // ==========================================
   if (!user) {
     return (
-      <div className="w-full bg-gradient-to-b from-orange-50/50 to-white flex items-center justify-center px-4 py-8">
+      <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50">
+        <Navbar />
+        <div className="w-full flex items-center justify-center px-4 py-20">
         <div className="max-w-md w-full bg-white rounded-3xl shadow-xl border border-orange-100/85 p-6 sm:p-8 text-center space-y-5 relative overflow-hidden">
           <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-orange-500 to-amber-500" />
           
@@ -102,6 +145,18 @@ export default function Profile() {
             </div>
           </div>
         </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50">
+        <Navbar />
+        <div className="flex justify-center items-center py-40">
+          <div className="animate-spin rounded-full h-16 w-16 border-4 border-orange-500 border-t-transparent"></div>
+        </div>
       </div>
     );
   }
@@ -110,7 +165,9 @@ export default function Profile() {
   // VIEW: IF SIGNED IN (AUTHENTICATED DASHBOARD)
   // ==========================================
   return (
-    <div className="min-h-screen bg-gray-50/60 py-10 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50">
+      <Navbar />
+      <div className="py-10 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto space-y-8">
         
         {/* Profile Header Banner Card */}
@@ -279,10 +336,20 @@ export default function Profile() {
               <div className="pt-4 flex justify-end">
                 <button 
                   type="submit"
-                  className="flex items-center space-x-2 bg-orange-600 hover:bg-orange-700 text-white font-bold px-8 py-3 rounded-2xl shadow-lg shadow-orange-600/25 transition text-sm"
+                  disabled={saving}
+                  className="flex items-center space-x-2 bg-orange-600 hover:bg-orange-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-bold px-8 py-3 rounded-2xl shadow-lg shadow-orange-600/25 transition text-sm"
                 >
-                  <Save className="w-4 h-4" />
-                  <span>Save Changes</span>
+                  {saving ? (
+                    <>
+                      <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></div>
+                      <span>Saving...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Save className="w-4 h-4" />
+                      <span>Save Changes</span>
+                    </>
+                  )}
                 </button>
               </div>
             )}
@@ -324,6 +391,7 @@ export default function Profile() {
           </Link>
         </div>
 
+      </div>
       </div>
     </div>
   );
