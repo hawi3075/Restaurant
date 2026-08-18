@@ -1,281 +1,144 @@
 import React, { useState } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { 
-  Utensils, Globe, LogOut, User as UserIcon, Menu, X, 
-  ShoppingBag, MapPin, Crown, Ticket, HelpCircle, Store, Info, LayoutGrid 
-} from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
+import { useNavigate, Link } from 'react-router-dom';
+import { Mail, Lock, ArrowRight, ArrowLeft, Utensils } from 'lucide-react';
 
-export default function Navbar() {
-  const { user, logout } = useAuth();
+export default function Login() {
   const navigate = useNavigate();
-  const location = useLocation();
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
 
-  const handleLogout = () => {
-    logout();
-    setMenuOpen(false);
-    navigate('/login');
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert("Logged in successfully!");
+    navigate('/');
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+    <div className="relative min-h-screen w-full flex items-center justify-center p-4 bg-gradient-to-br from-orange-950 via-gray-900 to-orange-900 overflow-hidden">
+      
+      {/* Restaurant Food Background Overlay Effect */}
+      <div className="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#f97316_1px,transparent_1px)] [background-size:16px_16px]" />
+      
+      {/* Glowing Ambient Shapes */}
+      <div className="absolute -top-32 -left-32 w-96 h-96 bg-orange-600/30 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-amber-500/20 rounded-full blur-3xl pointer-events-none" />
+
+      {/* Main Card Container */}
+      <div className="relative w-full max-w-4xl bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl border border-orange-100 overflow-hidden flex flex-col md:flex-row z-10">
         
-        {/* Brand Logo */}
-        <Link to="/" className="flex items-center space-x-2.5">
-          <div className="bg-orange-600 text-white p-2 rounded-xl shadow-md">
-            <Utensils className="w-5 h-5" />
-          </div>
-          <span className="text-2xl font-black tracking-tight text-gray-900">
-            ማእድ <span className="text-orange-600 font-medium text-sm">Ma'ad</span>
-          </span>
-        </Link>
+        {/* Top Orange Accent Bar */}
+        <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-orange-500 to-amber-500 z-20" />
 
-        {/* Navigation Links */}
-        <nav className="hidden lg:flex items-center space-x-8 font-medium text-gray-600">
-          <Link 
-            to="/" 
-            className={`flex items-center space-x-1 transition ${
-              location.pathname === '/' ? 'text-orange-600 font-bold' : 'hover:text-orange-600 text-gray-600'
-            }`}
-          >
-            <Utensils className={`w-4 h-4 ${location.pathname === '/' ? 'text-orange-600' : ''}`} />
-            <span>Home</span>
-          </Link>
+        {/* Left Side: Engaging Restaurant Showcase */}
+        <div className="w-full md:w-1/2 bg-gradient-to-br from-orange-600 to-amber-600 p-8 sm:p-12 text-white flex flex-col justify-between relative overflow-hidden">
           
-          <Link 
-            to="/categories" 
-            className={`transition ${
-              location.pathname === '/categories' ? 'text-orange-600 font-bold' : 'hover:text-orange-600 text-gray-600'
-            }`}
-          >
-            Category
-          </Link>
+          {/* Subtle pattern background for restaurant feel */}
+          <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:12px_12px]" />
 
-          <Link 
-            to="/restaurants" 
-            className={`transition ${
-              location.pathname === '/restaurants' ? 'text-orange-600 font-bold' : 'hover:text-orange-600 text-gray-600'
-            }`}
-          >
-            Restaurants
-          </Link>
-
-          <Link 
-            to="/about" 
-            className={`transition ${
-              location.pathname === '/about' ? 'text-orange-600 font-bold' : 'hover:text-orange-600 text-gray-600'
-            }`}
-          >
-            About Us
-          </Link>
-
-          <Link 
-            to="/contact" 
-            className={`transition ${
-              location.pathname === '/contact' ? 'text-orange-600 font-bold' : 'hover:text-orange-600 text-gray-600'
-            }`}
-          >
-            Contact
-          </Link>
-        </nav>
-
-        {/* Right Action Items */}
-        <div className="flex items-center space-x-4">
-          <button className="hidden sm:flex items-center space-x-1.5 text-gray-700 hover:text-orange-600 font-medium text-sm px-3 py-1.5 rounded-lg transition">
-            <Globe className="w-4 h-4 text-gray-500" />
-            <span>En</span>
-          </button>
-
-          {!user && (
-            <Link 
-              to="/login" 
-              className="hidden sm:block bg-orange-600 hover:bg-orange-700 text-white font-bold px-5 py-2.5 rounded-xl shadow-lg shadow-orange-600/20 transition text-sm"
-            >
-              Join Us
-            </Link>
-          )}
-
-          {/* Hamburger Menu Toggle */}
-          <button 
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="p-2.5 rounded-xl bg-gray-100 hover:bg-orange-50 text-gray-700 hover:text-orange-600 transition shadow-sm"
-            aria-label="Menu"
-          >
-            {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
-
-      </div>
-
-      {/* Backdrop overlay for smooth slide panel */}
-      {menuOpen && (
-        <div 
-          className="fixed inset-0 bg-black/40 backdrop-blur-xs z-40 transition-opacity" 
-          onClick={() => setMenuOpen(false)}
-        />
-      )}
-
-      {/* Slide-out Menu Panel from Right to Left */}
-      <div className={`fixed top-0 right-0 h-full w-80 sm:w-96 bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out flex flex-col ${
-        menuOpen ? 'translate-x-0' : 'translate-x-full'
-      }`}>
-        
-        {/* Header of Drawer */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-100">
-          <h3 className="font-black text-xl text-gray-900 tracking-tight">Menu</h3>
-          <button 
-            onClick={() => setMenuOpen(false)}
-            className="p-2 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-700 transition"
-          >
-            <X className="w-5 h-5" />
-          </button>
-        </div>
-
-        {/* Scrollable Menu Items */}
-        <div className="flex-1 overflow-y-auto p-6 space-y-3">
-          
-          {user && (
-            <div className="flex items-center space-x-3 p-3.5 bg-orange-50 rounded-2xl mb-4 border border-orange-100">
-              <div className="bg-orange-600 text-white p-2.5 rounded-xl shadow-md">
-                <UserIcon className="w-5 h-5" />
-              </div>
-              <div className="overflow-hidden">
-                <p className="font-bold text-gray-900 truncate">{user.name || 'User'}</p>
-                <p className="text-xs text-gray-500 truncate">{user.email}</p>
-              </div>
-            </div>
-          )}
-
-          <Link 
-            to="/profile" 
-            onClick={() => setMenuOpen(false)}
-            className="flex items-center space-x-4 p-3 rounded-2xl hover:bg-orange-50 hover:text-orange-600 group transition"
-          >
-            <div className="bg-orange-600 text-white p-2.5 rounded-xl shadow-md group-hover:scale-105 transition">
-              <UserIcon className="w-5 h-5" />
-            </div>
-            <span className="font-bold text-gray-800 group-hover:text-orange-600 text-sm">Profile</span>
-          </Link>
-
-          <Link 
-            to="/orders" 
-            onClick={() => setMenuOpen(false)}
-            className="flex items-center space-x-4 p-3 rounded-2xl hover:bg-orange-50 hover:text-orange-600 group transition"
-          >
-            <div className="bg-orange-600 text-white p-2.5 rounded-xl shadow-md group-hover:scale-105 transition">
-              <ShoppingBag className="w-5 h-5" />
-            </div>
-            <span className="font-bold text-gray-800 group-hover:text-orange-600 text-sm">My Orders</span>
-          </Link>
-
-          <Link 
-            to="/address" 
-            onClick={() => setMenuOpen(false)}
-            className="flex items-center space-x-4 p-3 rounded-2xl hover:bg-orange-50 hover:text-orange-600 group transition"
-          >
-            <div className="bg-orange-600 text-white p-2.5 rounded-xl shadow-md group-hover:scale-105 transition">
-              <MapPin className="w-5 h-5" />
-            </div>
-            <span className="font-bold text-gray-800 group-hover:text-orange-600 text-sm">My Address</span>
-          </Link>
-
-          <Link 
-            to="/subscription" 
-            onClick={() => setMenuOpen(false)}
-            className="flex items-center space-x-4 p-3 rounded-2xl hover:bg-orange-50 hover:text-orange-600 group transition"
-          >
-            <div className="bg-orange-600 text-white p-2.5 rounded-xl shadow-md group-hover:scale-105 transition">
-              <Crown className="w-5 h-5" />
-            </div>
-            <span className="font-bold text-gray-800 group-hover:text-orange-600 text-sm">My Subscription</span>
-          </Link>
-
-          <Link 
-            to="/language" 
-            onClick={() => setMenuOpen(false)}
-            className="flex items-center space-x-4 p-3 rounded-2xl hover:bg-orange-50 hover:text-orange-600 group transition"
-          >
-            <div className="bg-orange-600 text-white p-2.5 rounded-xl shadow-md group-hover:scale-105 transition">
-              <Globe className="w-5 h-5" />
-            </div>
-            <span className="font-bold text-gray-800 group-hover:text-orange-600 text-sm">Language</span>
-          </Link>
-
-          <Link 
-            to="/coupon" 
-            onClick={() => setMenuOpen(false)}
-            className="flex items-center space-x-4 p-3 rounded-2xl hover:bg-orange-50 hover:text-orange-600 group transition"
-          >
-            <div className="bg-orange-600 text-white p-2.5 rounded-xl shadow-md group-hover:scale-105 transition">
-              <Ticket className="w-5 h-5" />
-            </div>
-            <span className="font-bold text-gray-800 group-hover:text-orange-600 text-sm">Coupon</span>
-          </Link>
-
-          <Link 
-            to="/contact" 
-            onClick={() => setMenuOpen(false)}
-            className="flex items-center space-x-4 p-3 rounded-2xl hover:bg-orange-50 hover:text-orange-600 group transition"
-          >
-            <div className="bg-orange-600 text-white p-2.5 rounded-xl shadow-md group-hover:scale-105 transition">
-              <HelpCircle className="w-5 h-5" />
-            </div>
-            <span className="font-bold text-gray-800 group-hover:text-orange-600 text-sm">Help & Support</span>
-          </Link>
-
-          <div className="pt-4 border-t border-gray-100 space-y-2">
-            <Link 
-              to="/categories" 
-              onClick={() => setMenuOpen(false)}
-              className="flex items-center space-x-3 p-2.5 text-xs font-bold text-gray-600 hover:text-orange-600 transition"
-            >
-              <LayoutGrid className="w-4 h-4" />
-              <span>Browse Categories</span>
-            </Link>
-            <Link 
-              to="/restaurants" 
-              onClick={() => setMenuOpen(false)}
-              className="flex items-center space-x-3 p-2.5 text-xs font-bold text-gray-600 hover:text-orange-600 transition"
-            >
-              <Store className="w-4 h-4" />
-              <span>All Restaurants</span>
-            </Link>
-            <Link 
-              to="/about" 
-              onClick={() => setMenuOpen(false)}
-              className="flex items-center space-x-3 p-2.5 text-xs font-bold text-gray-600 hover:text-orange-600 transition"
-            >
-              <Info className="w-4 h-4" />
-              <span>About Us</span>
-            </Link>
-          </div>
-
-        </div>
-
-        {/* Footer Action */}
-        <div className="p-6 border-t border-gray-100 bg-gray-50">
-          {user ? (
+          {/* Back Icon Button (Top Left inside the orange panel) */}
+          <div className="relative z-20">
             <button 
-              onClick={handleLogout}
-              className="w-full flex items-center justify-center space-x-2 bg-red-50 text-red-600 hover:bg-red-100 font-bold py-3 rounded-xl transition text-sm shadow-sm"
+              onClick={() => navigate('/')}
+              className="inline-flex items-center space-x-1.5 px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs transition border border-white/20 shadow-sm cursor-pointer"
             >
-              <LogOut className="w-4 h-4" />
-              <span>Logout</span>
+              <ArrowLeft className="w-4 h-4" />
+              <span>Back to Home</span>
             </button>
-          ) : (
-            <Link 
-              to="/login" 
-              onClick={() => setMenuOpen(false)}
-              className="w-full block text-center bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 rounded-xl shadow-lg shadow-orange-600/20 transition text-sm"
+          </div>
+
+          <div className="relative z-10 my-auto py-8">
+            <h1 className="text-3xl sm:text-4xl font-black tracking-tight mb-3 leading-tight">
+              Delicious meals delivered to your doorstep.
+            </h1>
+            <p className="text-orange-100 text-xs sm:text-sm leading-relaxed">
+              Sign in to manage your orders, track real-time deliveries, and experience top-tier local restaurants with Ma'ad (ማእድ).
+            </p>
+          </div>
+
+          {/* Empty spacer to balance layout evenly */}
+          <div className="relative z-10"></div>
+        </div>
+
+        {/* Right Side: Login Form */}
+        <div className="w-full md:w-1/2 p-8 sm:p-12 flex flex-col justify-center">
+          
+          <div className="mb-6">
+            <div className="w-12 h-12 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center mb-3 shadow-inner">
+              <Utensils className="w-6 h-6" />
+            </div>
+            <h2 className="text-2xl font-black text-gray-900 tracking-tight">Welcome Back</h2>
+            <p className="text-xs text-gray-500 mt-1">Please enter your credentials to access your account.</p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            
+            <div className="space-y-1.5">
+              <label className="text-[11px] font-bold uppercase tracking-wider text-gray-500">Email Address</label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                  <Mail className="w-4 h-4" />
+                </div>
+                <input 
+                  type="email" 
+                  name="email" 
+                  required 
+                  placeholder="hawig3521@gmail.com"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 bg-gray-50/50 focus:bg-white focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 outline-none text-xs font-medium transition"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-1.5">
+              <div className="flex items-center justify-between">
+                <label className="text-[11px] font-bold uppercase tracking-wider text-gray-500">Password</label>
+                <a href="#forgot" onClick={(e) => e.preventDefault()} className="text-[11px] font-bold text-orange-600 hover:underline">
+                  Forgot?
+                </a>
+              </div>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                  <Lock className="w-4 h-4" />
+                </div>
+                <input 
+                  type="password" 
+                  name="password" 
+                  required 
+                  placeholder="••••••••"
+                  value={formData.password}
+                  onChange={handleChange}
+                  className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 bg-gray-50/50 focus:bg-white focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 outline-none text-xs font-medium transition"
+                />
+              </div>
+            </div>
+
+            <button 
+              type="submit"
+              className="w-full mt-2 flex items-center justify-center space-x-2 bg-orange-600 hover:bg-orange-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-orange-600/25 transition text-xs uppercase tracking-wider cursor-pointer"
             >
-              Sign In / Join Us
+              <span>Sign In</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+
+          </form>
+
+          <div className="text-center mt-6 text-xs text-gray-500">
+            Don't have an account?{' '}
+            <Link to="/signup" className="font-bold text-orange-600 hover:underline">
+              Sign Up
             </Link>
-          )}
+          </div>
+
         </div>
 
       </div>
-    </header>
+    </div>
   );
 }

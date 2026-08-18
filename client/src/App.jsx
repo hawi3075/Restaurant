@@ -17,7 +17,19 @@ import Orders from './pages/customer/Orders';
 import Language from './pages/customer/Language';
 import Chat from './pages/customer/Chat';
 
+// Import Admin Dashboard & Sub-pages
 import AdminDashboard from './pages/admin/AdminDashboard';
+import AdminZonesPage from './pages/admin/AdminZonesPage';
+import AdminRestaurantsPage from './pages/admin/AdminRestaurantsPage';
+import AdminAddRestaurantPage from './pages/admin/AdminAddRestaurantPage';
+import AdminMainCategoriesPage from './pages/admin/AdminMainCategoriesPage';
+import AdminFoodCatalogPage from './pages/admin/AdminFoodCatalogPage';
+import AdminAddonsPage from './pages/admin/AdminAddonsPage';
+import AdminDeliverymanPage from './pages/admin/AdminDeliverymanPage';
+import AdminEmployeesPage from './pages/admin/AdminEmployeesPage';
+import AdminCustomersPage from './pages/admin/AdminCustomersPage';
+import AdminSupportPage from './pages/admin/AdminSupportPage';
+
 import ChefDashboard from './pages/chef/ChefDashboard';
 import WaiterDashboard from './pages/waiter/WaiterDashboard';
 import DriverDashboard from './pages/driver/DriverDashboard';
@@ -48,11 +60,23 @@ function App() {
             <Route path="/language" element={<Language />} />
             <Route path="/chat" element={<Chat />} />
 
-            {/* Staff & Admin Portals */}
-            <Route path="/admin/*" element={<AdminDashboard />} />
+            {/* Staff Portals */}
             <Route path="/chef/*" element={<ChefDashboard />} />
             <Route path="/waiter/*" element={<WaiterDashboard />} />
             <Route path="/driver/*" element={<DriverDashboard />} />
+
+            {/* Admin Portal & Nested Routes matching the Sidebar */}
+            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin/zones" element={<AdminZonesPage />} />
+            <Route path="/admin/restaurants/list" element={<AdminRestaurantsPage />} />
+            <Route path="/admin/restaurants/add" element={<AdminAddRestaurantPage />} />
+            <Route path="/admin/food/categories" element={<AdminMainCategoriesPage />} />
+            <Route path="/admin/food/items" element={<AdminFoodCatalogPage />} />
+            <Route path="/admin/food/addons" element={<AdminAddonsPage />} />
+            <Route path="/admin/delivery/list" element={<AdminDeliverymanPage />} />
+            <Route path="/admin/employees/list" element={<AdminEmployeesPage />} />
+            <Route path="/admin/customers" element={<AdminCustomersPage />} />
+            <Route path="/admin/support/messages" element={<AdminSupportPage />} />
 
             {/* Fallback */}
             <Route path="*" element={<Navigate to="/" replace />} />
