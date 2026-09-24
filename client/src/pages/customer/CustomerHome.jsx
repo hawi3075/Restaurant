@@ -659,7 +659,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* --- FOOTER --- */}
+      
       <footer id="contact" className="bg-gray-900 text-gray-300 py-12 relative overflow-hidden">
         <div className="absolute -top-24 -right-24 w-72 h-72 bg-orange-600/10 rounded-full blur-3xl animate-float-slow"></div>
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-10 relative z-10">
